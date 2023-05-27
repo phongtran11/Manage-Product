@@ -1,10 +1,8 @@
 import { Button, Space } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { CreateUserModal } from "./CreateUserModal";
 
-type Props = object;
-
-export const UserHeader = (props: Props) => {
+export const UserHeader = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const changeOpenModalHandler = (status: boolean) => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Button, Form, Input, Modal, Typography, message } from "antd";
 import { useMutateRegister } from "@/api";
 

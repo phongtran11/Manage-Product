@@ -1,9 +1,7 @@
 import { useMutation } from "react-query";
 import { InstanceAxios } from "./baseApi";
 import { saveStorage } from "../util";
-import { AxiosError, AxiosResponse } from "axios";
-import { TLoginRes } from "@/types/models";
-
+import { AxiosError } from "axios";
 export const userUri = {
   signIn: "/auth/signIn",
   signUp: "/auth/signUp",

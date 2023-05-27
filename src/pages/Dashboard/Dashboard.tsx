@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = any;
-
-const Dashboard = (props: Props) => {
+const Dashboard = () => {
   return <div>Dashboard</div>;
 };
 
