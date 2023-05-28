@@ -1,7 +1,9 @@
 import { getStorage } from "../util";
 import axios, { AxiosInstance } from "axios";
 
-const baseURL = "http://localhost:4200";
+let baseURL = import.meta.env.VITE_API_BASE_URL;
+
+if (!baseURL) baseURL = "http://localhost:4200";
 
 export const InstanceAxios: AxiosInstance = axios.create({
   baseURL,
