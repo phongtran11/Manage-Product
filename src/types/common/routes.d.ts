@@ -1,6 +1,7 @@
 import React from "react";
 import { IconType } from "react-icons";
 import { TKeyPermission } from "../models/user";
+import { Navigate } from "react-router";
 
 export type TRoute = {
   path: string;

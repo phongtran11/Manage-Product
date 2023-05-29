@@ -9,8 +9,7 @@ export const AuthWrapper: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (!userData?.access_token) navigate(RootPaths.LOGIN);
-    console.log(userData);
-  }, [userData.access_token, navigate]);
+  }, [userData?.access_token, navigate]);
 
   return <div>{children}</div>;
 };

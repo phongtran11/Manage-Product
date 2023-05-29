@@ -1,4 +1,4 @@
-import { Button, Space } from "antd";
+import { Button } from "antd";
 import { useState } from "react";
 import { CreateUserModal } from "./CreateUserModal";
 
@@ -10,7 +10,7 @@ export const UserHeader = () => {
   };
 
   return (
-    <Space>
+    <>
       <Button type="primary" onClick={() => setOpenModal(true)}>
         Tạo nhân viên
       </Button>
@@ -18,6 +18,6 @@ export const UserHeader = () => {
         open={openModal}
         changeOpenModalHandler={changeOpenModalHandler}
       />
-    </Space>
+    </>
   );
 };

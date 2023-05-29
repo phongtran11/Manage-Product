@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from "react";
-import { Button, Form, Input, Modal, Typography, message } from "antd";
-import { useMutateRegister } from "@/api";
+import { useCallback, useEffect, useState } from "react";
+import { Button, Form, Input, Modal, Select, Typography, message } from "antd";
+import { useMutateRegister, useQueryUserList } from "@/api";
+import { ERoles } from "../../user.enum";
 
 type Props = {
   open: boolean;
@@ -12,15 +13,30 @@ type TForm = {
   password: string;
   displayname: string;
   rePassword: string;
+  role: string;
 };
 
 export const CreateUserModal = ({ open, changeOpenModalHandler }: Props) => {
-  const { mutate, error, isLoading, data } = useMutateRegister();
+  const { mutate, error, isLoading } = useMutateRegister();
+  const [fetchUser, setFetchUser] = useState(false);
+
+  useQueryUserList({ page: 1, limit: 10 }, fetchUser);
+
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm<TForm>();
 
-  const submitHandler = ({ username, password, displayname }: TForm) => {
-    mutate({ username, password, displayname });
+  const submitHandler = ({ username, password, displayname, role }: TForm) => {
+    mutate(
+      { username, password, displayname, role },
+      {
+        onSuccess() {
+          changeOpenModalHandler(false);
+          openNotifications("Tạo thành công");
+          setFetchUser(true);
+          form.resetFields();
+        },
+      }
+    );
   };
 
   const openNotifications = useCallback(
@@ -34,12 +50,11 @@ export const CreateUserModal = ({ open, changeOpenModalHandler }: Props) => {
     [messageApi]
   );
 
+  const usernameField = Form.useWatch(["username"], form);
+
   useEffect(() => {
-    if (data) {
-      changeOpenModalHandler(false);
-      openNotifications("Tạo thành công");
-    }
-  }, [data, changeOpenModalHandler, openNotifications]);
+    form.setFieldValue(["username"], usernameField?.replace(/\s/g, ""));
+  }, [usernameField, form]);
 
   return (
     <Modal
@@ -49,6 +64,7 @@ export const CreateUserModal = ({ open, changeOpenModalHandler }: Props) => {
       onCancel={() => changeOpenModalHandler(false)}
       footer={null}
       maskClosable={false}
+      destroyOnClose={true}
     >
       {contextHolder}
       <Form
@@ -114,6 +130,34 @@ export const CreateUserModal = ({ open, changeOpenModalHandler }: Props) => {
           <Input />
         </Form.Item>
 
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng chọn",
+            },
+          ]}
+          name="role"
+          label="Chức danh"
+        >
+          <Select
+            options={[
+              {
+                label: "nhân viên điều phối",
+                value: ERoles.coordinator,
+              },
+              {
+                label: "nhân viên giao hàng",
+                value: ERoles.shipper,
+              },
+              {
+                label: "nhân viên kế toán",
+                value: ERoles.accountant,
+              },
+            ]}
+          />
+        </Form.Item>
+
         <div style={{ minHeight: "20px", width: "100%" }}>
           <Typography.Text type="danger">
             {error?.response?.data.message}
@@ -129,7 +173,12 @@ export const CreateUserModal = ({ open, changeOpenModalHandler }: Props) => {
           >
             Tạo
           </Button>
-          <Button disabled={isLoading}>Hủy</Button>
+          <Button
+            onClick={() => changeOpenModalHandler(false)}
+            disabled={isLoading}
+          >
+            Hủy
+          </Button>
         </div>
       </Form>
     </Modal>

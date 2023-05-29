@@ -5,15 +5,27 @@ import {
   UserOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Popover, Avatar } from "antd";
-import { Outlet, useNavigate } from "react-router";
+import {
+  Layout,
+  Menu,
+  Button,
+  theme,
+  Popover,
+  Avatar,
+  Result,
+  Image,
+} from "antd";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { useUser } from "@/store/user.store";
 import classes from "./Layout.module.scss";
+import dashboardSvg from "@/assets/dashboard-bg.jpg";
 
 const { Header, Sider, Content } = Layout;
 export const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
   const {
     userData: { user },
     updateUser,
@@ -110,6 +122,20 @@ export const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
+          {location.pathname === "/" && (
+            <Result
+              icon={
+                <Image
+                  height={500}
+                  width={500}
+                  src={dashboardSvg}
+                  preview={false}
+                />
+              }
+              title="Chào bạn đến với trang chủ"
+              subTitle="Vui lòng chọn tác vụ nhé!"
+            />
+          )}
           <Outlet />
         </Content>
       </Layout>
