@@ -103,6 +103,9 @@ export const UserList = () => {
         columns={columns}
         dataSource={data?.data ?? []}
         loading={isLoading}
+        scroll={{
+          x: true,
+        }}
       />
       <Modal
         open={deletePopup}

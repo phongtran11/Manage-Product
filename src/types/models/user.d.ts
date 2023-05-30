@@ -1,3 +1,5 @@
+import { ERoles } from "@/pages";
+
 export type TPermissionAction = {
   view: boolean;
   create: boolean;
@@ -8,7 +10,7 @@ export type TKeyPermission = keyof TPermissionAction;
 
 export type TUserModel = {
   username: string;
-  role: string;
+  role: ERoles;
   password?: string;
   displayname?: string;
 };

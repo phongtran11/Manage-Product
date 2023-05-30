@@ -1,0 +1,23 @@
+.form {
+  :global {
+    .ant-input-number-group-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+.summary {
+  background-color: #d7d7d7;
+
+  :global {
+    .ant-space {
+      width: 100%;
+    }
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

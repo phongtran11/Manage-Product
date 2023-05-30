@@ -6,6 +6,14 @@
   justify-content: space-between;
 }
 
+.header-collapsed {
+  padding-left: 0;
+  background: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
 .user-info {
   height: auto;
   display: flex;

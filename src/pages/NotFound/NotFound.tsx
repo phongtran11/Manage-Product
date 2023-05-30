@@ -1,6 +1,5 @@
 import { Button, Result } from "antd";
 import { Link } from "react-router-dom";
-import { RootPaths } from "@/routes";
 
 const NotFound = () => (
   <Result
@@ -9,7 +8,7 @@ const NotFound = () => (
     subTitle="Xin lỗi trang bạn tìm kiếm không tồn tại."
     extra={
       <Button type="primary">
-        <Link to={RootPaths.DASHBOARD}>Trở về trang chủ</Link>
+        <Link to={"/"}>Trở về trang chủ</Link>
       </Button>
     }
   />

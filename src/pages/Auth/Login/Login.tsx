@@ -29,7 +29,7 @@ const Login = () => {
   }, [data, updateUser, navigate]);
 
   useEffect(() => {
-    if (userData.access_token) navigate(RootPaths.DASHBOARD);
+    if (userData.access_token) navigate("/");
   }, [userData, navigate]);
 
   return (
