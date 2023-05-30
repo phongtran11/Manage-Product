@@ -20,6 +20,8 @@ type Props = {
   form: FormInstance;
   onFinish: ((values: TInvoice) => void) | undefined;
   initialValues?: Partial<TInvoice>;
+  textAction: string;
+  isLoading?: boolean;
 };
 
 export const formatNumber = (value: any) => {
@@ -30,7 +32,13 @@ export const formatNumber = (value: any) => {
   return "0";
 };
 
-const InvoiceForm = ({ form, onFinish, initialValues }: Props) => {
+const InvoiceForm = ({
+  form,
+  onFinish,
+  initialValues,
+  textAction,
+  isLoading,
+}: Props) => {
   const amountBox = Form.useWatch(["amountBox"], form);
   const weightWrapper = Form.useWatch(["weightWrapper"], form);
   const weightBoxAndPackage = Form.useWatch(["weightBoxAndPackage"], form);
@@ -55,8 +63,8 @@ const InvoiceForm = ({ form, onFinish, initialValues }: Props) => {
           >
             <Row gutter={[12, 12]}>
               <Col span={24} style={{ display: "flex", justifyContent: "end" }}>
-                <Button htmlType="submit" type="primary">
-                  Tạo
+                <Button htmlType="submit" type="primary" loading={isLoading}>
+                  {textAction}
                 </Button>
               </Col>
               <Col span={12}>

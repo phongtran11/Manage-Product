@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from "axios";
 
 let baseURL = import.meta.env.API_BASE_URL;
 
-if (!baseURL) baseURL = "http://localhost:4200";
+if (!baseURL) baseURL = "https://manage-product-be-production.up.railway.app";
 
 export const InstanceAxios: AxiosInstance = axios.create({
   baseURL,

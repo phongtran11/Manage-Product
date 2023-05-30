@@ -4,7 +4,6 @@ import { Button, Card, Form, Input, Space } from "antd";
 import { useMutateLogin } from "@/api";
 import { useUser } from "@/store";
 import { useNavigate } from "react-router";
-import { RootPaths } from "@/routes";
 
 export type TDataLogin = {
   username: string;

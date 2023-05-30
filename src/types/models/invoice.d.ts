@@ -5,7 +5,7 @@ export type TInvoice = {
   weightWrapper: number;
   weightBoxAndPackage: number;
   amountBox: number;
-  dateImport: Date;
+  dateImport: Dayjs;
   weightCancelSG: number;
   reasonCancelSG: string;
   weightCancelDL: number;

@@ -1,15 +1,25 @@
 import { TInvoice } from "@/types/models";
-import { useMutateCreateInvoice } from "@/api/invoice.query";
+import { invoiceUri, useMutateCreateInvoice } from "@/api/invoice.query";
 import InvoiceForm from "../InoviceForm/InvoiceForm";
 import { Form, Typography } from "antd";
+import { useNavigate } from "react-router";
+import { InvoicePaths } from "@/routes";
+import { useQueryClient } from "react-query";
 
 const CreateInvoice = () => {
   const [form] = Form.useForm<TInvoice>();
-  const { mutate } = useMutateCreateInvoice();
-
+  const { mutate, isSuccess: createSuccess } = useMutateCreateInvoice();
+  const navigate = useNavigate();
   const submitHandler = (values: TInvoice) => {
     mutate(values);
   };
+
+  const queryClient = useQueryClient();
+
+  if (createSuccess) {
+    queryClient.invalidateQueries({ queryKey: [invoiceUri.list] });
+    navigate(InvoicePaths.LIST);
+  }
 
   const initialValues: Partial<TInvoice> = {
     weightBoxAndPackage: 0,
@@ -26,6 +36,7 @@ const CreateInvoice = () => {
         form={form}
         onFinish={submitHandler}
         initialValues={initialValues}
+        textAction="Tạo"
       />
     </>
   );
