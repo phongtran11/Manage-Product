@@ -11,4 +11,5 @@ export const UserPaths = {
 export const InvoicePaths = {
   LIST: `${RootPaths.Invoice}/list`,
   CREATE: `${RootPaths.Invoice}/create`,
+  EDIT: `${RootPaths.Invoice}/edit/:id`,
 };

@@ -22,6 +22,14 @@ type Props = {
   initialValues?: Partial<TInvoice>;
 };
 
+export const formatNumber = (value: any) => {
+  const parsed = Number(value);
+  if (typeof parsed === "number") {
+    return new Intl.NumberFormat("en-US").format(parsed);
+  }
+  return "0";
+};
+
 const InvoiceForm = ({ form, onFinish, initialValues }: Props) => {
   const amountBox = Form.useWatch(["amountBox"], form);
   const weightWrapper = Form.useWatch(["weightWrapper"], form);
@@ -32,15 +40,7 @@ const InvoiceForm = ({ form, onFinish, initialValues }: Props) => {
   const totalWithWrapper = amountBox * weightWrapper;
   const totalWrapper = amountBox * weightBoxAndPackage;
   const totalWithoutWrapper = totalWithWrapper - totalWrapper;
-  const total = totalWithoutWrapper - weightCancelSg - weightCancelSg;
-
-  const formatNumber = (value: any) => {
-    const parsed = Number(value);
-    if (typeof parsed === "number") {
-      return new Intl.NumberFormat("en-US").format(parsed);
-    }
-    return "0";
-  };
+  const total = totalWithoutWrapper - weightCancelSg - weightCancelDl;
 
   return (
     <>
